@@ -8,7 +8,7 @@ function Deliveryverify() {
 
   useEffect(() => {
     api
-      .get("/auth/town/cookie") // cookie auto sent
+      .get("/auth/deliveryBoy/cookie") // cookie auto sent
       .then((res) => {
         console.log("User:", res.data.user);
         navigate("/location"); // or wherever

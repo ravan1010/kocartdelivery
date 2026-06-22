@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 // import Navbar from '../componetstoowner/navbertoowner'
 import api from '../api';
 import { ToggleRight, ToggleLeft } from 'lucide-react';
+import { generateAndSaveFCMToken } from '../utili/token';
+
 
 const Deliverydashboard = () => {
 
@@ -63,6 +65,7 @@ const Deliverydashboard = () => {
       await fetchOrders()
       await fetchAssignOrders()
       await fetchpickedupOrders()
+      await generateAndSaveFCMToken()
     }
     loadData()
   }, [])
@@ -246,13 +249,26 @@ const Deliverydashboard = () => {
                     {order.userId?.name}
                   </h3>
 
-                  <p className="text-gray-600">
+                  {/* <p className="text-gray-600">
                     📍 {order.address?.ASSV}
-                  </p>
+                  </p> */}
 
                   <p className="text-xs text-gray-400">
                     #{order._id.slice(-8)}
                   </p>
+
+                   <p className="text-xs text-gray-400">
+                    {order.paymentMethod}
+                  </p>
+
+                  <p className="text-xs text-gray-400">
+                    {order.paymentStatus}
+                  </p>
+
+                  <p className="text-xs text-gray-400">
+                    {order.totalAmount}
+                  </p>
+
                 </div>
 
                 <button
@@ -305,9 +321,28 @@ const Deliverydashboard = () => {
                           📍 Navigate to Shop
                         </a>
                       </div>
+
+                      {shop.items?.map((item) => (
+                        <h3
+                          key={item._id}
+                          className="text-lg font-bold text-black break-words"
+                        > 
+                          {item.name} - {item.variantName} 
+                          <br />
+                          qtn : {item.quantity} 
+                          <br />
+                          price : {item.price}
+
+                        </h3>
+                      ))}
+
+                      {shop.subtotal}
+
                     </h3>
                   ))}
                 </div>
+
+
 
                 <button
                   onClick={() => pickedupOrder(order._id)}
@@ -363,6 +398,11 @@ const Deliverydashboard = () => {
                   <p>
                     {order.number}
                   </p>
+
+                  <p>
+                    {order.totalAmount}
+                  </p>
+
                 </div>
 
                 <button
