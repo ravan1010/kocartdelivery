@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+svg {
+  height: 100%;
+}
