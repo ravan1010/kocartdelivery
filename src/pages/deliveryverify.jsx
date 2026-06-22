@@ -13,12 +13,12 @@ function Deliveryverify() {
     api
       .get("/auth/deliveryBoy/cookie") // cookie auto sent
       .then((res) => {
-        console.log("User:", res.data.user);
+        console.log("User:", res.data);
         navigate("/location"); // or wherever
       })
       .catch(() => {
         navigate("/");
-      });
+      })
   }, []);
 
   return <h2>Logging you in...</h2>;
