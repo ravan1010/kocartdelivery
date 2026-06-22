@@ -7,6 +7,9 @@ function Deliveryverify() {
   const navigate = useNavigate();
 
   useEffect(() => {
+
+    console.log("delivery");
+    
     api
       .get("/auth/deliveryBoy/cookie") // cookie auto sent
       .then((res) => {
