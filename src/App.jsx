@@ -13,10 +13,8 @@ function App() {
             <Router>
                 <Routes>
                     <Route path="/login" element={<DeliveryLog />} />
-<Route
-  path="/deliveryBoy-auth-success"
-  element={<Deliveryverify />}
-/>                    <Route element={<ProtectedDeliveryBoy />}>
+                    <Route path="/deliveryBoy-auth-success" element={<Deliveryverify />} />             
+                    <Route element={<ProtectedDeliveryBoy />}>
                         <Route path="/location" element={<Location />} />
                         <Route path='/' element={<Deliverydashboard />} />
                     </Route>
