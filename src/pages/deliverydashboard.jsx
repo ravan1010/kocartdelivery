@@ -391,7 +391,7 @@ const Deliverydashboard = () => {
                           >
                             <div className="flex justify-between">
                               <span className="font-medium">
-                               {item.name} - {item.name}
+                               {item.productId?.name}
                               </span>
 
                               <span className="font-bold text-green-600">
@@ -400,7 +400,7 @@ const Deliverydashboard = () => {
                             </div>
 
                             <div className="text-sm text-gray-500 mt-1">
-                              Variant: {item.variantName}
+                              Variant: {item.name}
                             </div>
 
                             <div className="text-sm text-gray-500">
