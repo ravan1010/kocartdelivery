@@ -182,37 +182,39 @@ const Deliverydashboard = () => {
       </div>
 
       {/* Navigation */}
-      <div className="bg-white rounded-xl shadow p-2 mb-4 overflow-x-auto">
-        <div className="flex gap-2 min-w-max">
+      <div className="bg-white rounded-2xl shadow-md p-2 mb-6 overflow-x-auto">
+        <div className="flex gap-3 min-w-max">
+
           <button
             onClick={() => setstep(1)}
-            className={`px-5 py-2 rounded-xl font-medium transition ${step === 1
-              ? "bg-green-400 text-white"
-              : "bg-gray-200 text-gray-700"
+            className={`px-6 py-3 rounded-xl font-semibold transition-all ${step === 1
+                ? "bg-green-600 text-white shadow-lg"
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
           >
-            Available Orders
+            🛒 Available Orders
           </button>
 
           <button
             onClick={() => setstep(2)}
-            className={`px-5 py-2 rounded-xl font-medium transition ${step === 2
-              ? "bg-green-700 text-white"
-              : "bg-gray-200 text-gray-700"
+            className={`px-6 py-3 rounded-xl font-semibold transition-all ${step === 2
+                ? "bg-orange-500 text-white shadow-lg"
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
           >
-            pickup
+            📦 Pickup
           </button>
 
           <button
             onClick={() => setstep(3)}
-            className={`px-5 py-2 rounded-xl font-medium transition ${step === 3
-              ? "bg-blue-600 text-white"
-              : "bg-gray-200 text-gray-700"
+            className={`px-6 py-3 rounded-xl font-semibold transition-all ${step === 3
+                ? "bg-blue-600 text-white shadow-lg"
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
           >
-            My Deliveries
+            🚚 Delivery
           </button>
+
         </div>
       </div>
 
@@ -292,8 +294,8 @@ const Deliverydashboard = () => {
 
                       <p
                         className={`font-semibold ${order.paymentStatus === "Paid"
-                            ? "text-green-600"
-                            : "text-red-600"
+                          ? "text-green-600"
+                          : "text-red-600"
                           }`}
                       >
                         {order.paymentStatus}
@@ -493,8 +495,8 @@ const Deliverydashboard = () => {
                     <p className="text-xs text-gray-500">Payment Status</p>
                     <p
                       className={`font-semibold ${order.paymentStatus === "Paid"
-                          ? "text-green-600"
-                          : "text-red-600"
+                        ? "text-green-600"
+                        : "text-red-600"
                         }`}
                     >
                       {order.paymentStatus}
