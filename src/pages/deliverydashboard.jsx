@@ -218,11 +218,11 @@ const Deliverydashboard = () => {
 
       {/* Available Orders */}
       {step === 1 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {orders?.length === 0 ? (
-            <div className="col-span-full bg-white rounded-xl p-8 shadow text-center">
-              <h2 className="font-semibold text-lg">
-                No Orders Available
+            <div className="col-span-full bg-white rounded-2xl p-10 shadow-md text-center">
+              <h2 className="text-xl font-bold text-gray-700">
+                No Orders Available 📭
               </h2>
             </div>
           ) : (
@@ -230,53 +230,96 @@ const Deliverydashboard = () => {
             orders.map((order) => (
               <div
                 key={order._id}
-                className="bg-white rounded-2xl shadow-md p-5 border hover:shadow-lg transition"
+                className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
               >
-                <div className="space-y-2">
-
-                  {/* <h3 className='text-lg font-bold text-black break-words'> */}
-                  {order.shop?.map((shop) => (
-                    <h3
-                      key={shop._id}
-                      className='text-lg font-bold text-black break-words'
-                    >
-                      {shop.admin?.companyName}
-                    </h3>
-                  ))}
-                  {/* </h3> */}
-
-                  <h3 className="text-lg font-bold text-gray-800 break-words">
-                    {order.userId?.name}
-                  </h3>
-
-                  {/* <p className="text-gray-600">
-                    📍 {order.address?.ASSV}
-                  </p> */}
-
-                  <p className="text-xs text-gray-400">
-                    #{order._id.slice(-8)}
+                {/* Header */}
+                <div className="bg-green-600 text-white p-4">
+                  <p className="text-sm opacity-90">
+                    Order #{order._id.slice(-8)}
                   </p>
 
-                   <p className="text-xs text-gray-400">
-                    {order.paymentMethod}
-                  </p>
-
-                  <p className="text-xs text-gray-400">
-                    {order.paymentStatus}
-                  </p>
-
-                  <p className="text-xs text-gray-400">
-                    {order.totalAmount}
-                  </p>
-
+                  <h2 className="font-bold text-lg">
+                    🛒 New Delivery Request
+                  </h2>
                 </div>
 
-                <button
-                  onClick={() => acceptOrder(order._id)}
-                  className="w-full mt-4 bg-green-600 hover:bg-green-700 text-white py-2 rounded-xl font-semibold transition"
-                >
-                  Accept Order
-                </button>
+                <div className="p-5 space-y-4">
+                  {/* Shops */}
+                  <div className="bg-gray-50 rounded-xl p-3">
+                    <h4 className="font-semibold text-gray-700 mb-2">
+                      🏪 Pickup Stores
+                    </h4>
+
+                    {order.shop?.map((shop) => (
+                      <div
+                        key={shop._id}
+                        className="bg-white p-2 rounded-lg border mb-2 last:mb-0"
+                      >
+                        <p className="font-medium text-gray-800">
+                          {shop.admin?.companyName}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Customer */}
+                  <div className="bg-blue-50 rounded-xl p-3">
+                    <p className="text-sm text-gray-500">
+                      Customer
+                    </p>
+
+                    <p className="font-bold text-gray-800 text-lg">
+                      👤 {order.userId?.name}
+                    </p>
+                  </div>
+
+                  {/* Payment Details */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="bg-purple-50 p-3 rounded-xl">
+                      <p className="text-xs text-gray-500">
+                        Payment Method
+                      </p>
+
+                      <p className="font-semibold text-purple-700">
+                        {order.paymentMethod}
+                      </p>
+                    </div>
+
+                    <div className="bg-yellow-50 p-3 rounded-xl">
+                      <p className="text-xs text-gray-500">
+                        Status
+                      </p>
+
+                      <p
+                        className={`font-semibold ${order.paymentStatus === "Paid"
+                            ? "text-green-600"
+                            : "text-red-600"
+                          }`}
+                      >
+                        {order.paymentStatus}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Total */}
+                  <div className="bg-green-50 rounded-xl p-4 flex justify-between items-center">
+                    <span className="text-gray-600 font-medium">
+                      Order Value
+                    </span>
+
+                    <span className="text-2xl font-bold text-green-600">
+                      ₹{order.totalAmount}
+                    </span>
+                  </div>
+
+                  {/* Accept Button */}
+                  <button
+                    onClick={() => acceptOrder(order._id)}
+                    className="w-full py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold shadow-md transition-all"
+                  >
+                    ✅ Accept Order
+                  </button>
+                </div>
               </div>
             ))
           )}
@@ -285,11 +328,11 @@ const Deliverydashboard = () => {
 
       {/* pickup Orders */}
       {step === 2 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {assigned?.length === 0 ? (
-            <div className="col-span-full bg-white rounded-xl p-8 shadow text-center">
-              <h2 className="font-semibold text-lg">
-                No Active 
+            <div className="col-span-full bg-white rounded-2xl p-10 shadow-md text-center">
+              <h2 className="text-xl font-bold text-gray-700">
+                No Assigned Orders 📦
               </h2>
             </div>
           ) : (
@@ -297,59 +340,95 @@ const Deliverydashboard = () => {
             assigned.map((order) => (
               <div
                 key={order._id}
-                className="bg-white rounded-2xl shadow-md p-5 border hover:shadow-lg transition"
+                className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-300"
               >
-                <div className="space-y-2">
-                  <p className="text-xs text-gray-400">
-                    #{order._id.slice(-8)}
+                {/* Header */}
+                <div className="bg-orange-500 text-white p-4">
+                  <p className="text-sm opacity-90">
+                    Order #{order._id.slice(-8)}
                   </p>
+                  <h2 className="font-bold text-lg">
+                    📦 Assigned Order
+                  </h2>
+                </div>
 
+                <div className="p-5 space-y-4">
                   {order.shop?.map((shop) => (
-                    <h3
+                    <div
                       key={shop._id}
-                      className="text-lg font-bold text-black break-words"
+                      className="border rounded-2xl p-4 bg-gray-50"
                     >
-                      {shop.admin?.companyName}
+                      {/* Shop Info */}
+                      <div className="flex justify-between items-start gap-2">
+                        <div>
+                          <h3 className="font-bold text-lg text-gray-800">
+                            🏪 {shop.admin?.companyName}
+                          </h3>
+                        </div>
 
-                      <div className="mt-3">
                         <a
                           href={`https://www.google.com/maps?q=${shop.admin?.location.coordinates[1]},${shop.admin?.location.coordinates[0]}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg shadow-md hover:bg-blue-700 transition-all duration-200"
+                          className="px-3 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700"
                         >
-                          📍 Navigate to Shop
+                          📍 Navigate
                         </a>
                       </div>
 
-                      {shop.items?.map((item) => (
-                        <h3
-                          key={item._id}
-                          className="text-lg font-bold text-black break-words"
-                        > 
-                          {item.name} - {item.variantName} 
-                          <br />
-                          qtn : {item.quantity} 
-                          <br />
-                          price : {item.price}
+                      {/* Products */}
+                      <div className="mt-4 space-y-2">
+                        <h4 className="font-semibold text-gray-700">
+                          Products
+                        </h4>
 
-                        </h3>
-                      ))}
+                        {shop.items?.map((item) => (
+                          <div
+                            key={item._id}
+                            className="bg-white p-3 rounded-xl border"
+                          >
+                            <div className="flex justify-between">
+                              <span className="font-medium">
+                                {item.name}
+                              </span>
 
-                      {shop.subtotal}
+                              <span className="font-bold text-green-600">
+                                ₹{item.price}
+                              </span>
+                            </div>
 
-                    </h3>
+                            <div className="text-sm text-gray-500 mt-1">
+                              Variant: {item.variantName}
+                            </div>
+
+                            <div className="text-sm text-gray-500">
+                              Qty: {item.quantity}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Subtotal */}
+                      <div className="mt-4 bg-green-50 rounded-xl p-3 flex justify-between">
+                        <span className="font-medium text-gray-700">
+                          Shop Total
+                        </span>
+
+                        <span className="font-bold text-green-600">
+                          ₹{shop.subtotal}
+                        </span>
+                      </div>
+                    </div>
                   ))}
+
+                  {/* Pickup Button */}
+                  <button
+                    onClick={() => pickedupOrder(order._id)}
+                    className="w-full py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl shadow-md transition-all"
+                  >
+                    🚚 Mark as Picked Up
+                  </button>
                 </div>
-
-
-
-                <button
-                  onClick={() => pickedupOrder(order._id)}
-                  className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-xl font-semibold transition"
-                >
-                  pickedup
-                </button>
               </div>
             ))
           )}
@@ -358,11 +437,11 @@ const Deliverydashboard = () => {
 
       {/* delivery Orders */}
       {step === 3 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {pickedup?.length === 0 ? (
-            <div className="col-span-full bg-white rounded-xl p-8 shadow text-center">
-              <h2 className="font-semibold text-lg">
-                No Active Delivery
+            <div className="col-span-full bg-white rounded-2xl p-10 shadow-md text-center">
+              <h2 className="text-xl font-bold text-gray-700">
+                No Active Deliveries 🚚
               </h2>
             </div>
           ) : (
@@ -370,47 +449,87 @@ const Deliverydashboard = () => {
             pickedup.map((order) => (
               <div
                 key={order._id}
-                className="bg-white rounded-2xl shadow-md p-5 border hover:shadow-lg transition"
+                className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-300"
               >
-                <div className="space-y-2">
-                  <h3 className="text-lg font-bold text-gray-800 break-words">
+                {/* Header */}
+                <div className="bg-blue-600 text-white p-4">
+                  <h3 className="text-xl font-bold">
                     {order.userId?.name}
                   </h3>
-
-                  <p className="text-gray-600">
-                    {order.address?.ASSV}
+                  <p className="text-sm opacity-90">
+                    🚚 Out for Delivery
                   </p>
+                </div>
 
+                {/* Content */}
+                <div className="p-5 space-y-3">
 
+                  <div className="bg-gray-50 p-3 rounded-xl">
+                    <p className="text-sm text-gray-500">Delivery Address</p>
+                    <p className="font-medium text-gray-800">
+                      📍 {order.address?.ASSV}
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+
+                    <div className="bg-green-50 p-3 rounded-xl">
+                      <p className="text-xs text-gray-500">Amount</p>
+                      <p className="font-bold text-green-600">
+                        ₹{order.totalAmount}
+                      </p>
+                    </div>
+
+                    <div className="bg-blue-50 p-3 rounded-xl">
+                      <p className="text-xs text-gray-500">Payment</p>
+                      <p className="font-semibold text-blue-700">
+                        {order.paymentMethod}
+                      </p>
+                    </div>
+
+                  </div>
+
+                  <div className="bg-yellow-50 p-3 rounded-xl">
+                    <p className="text-xs text-gray-500">Payment Status</p>
+                    <p
+                      className={`font-semibold ${order.paymentStatus === "Paid"
+                          ? "text-green-600"
+                          : "text-red-600"
+                        }`}
+                    >
+                      {order.paymentStatus}
+                    </p>
+                  </div>
+
+                  <div className="bg-gray-50 p-3 rounded-xl">
+                    <p className="text-xs text-gray-500">Customer Number</p>
+                    <a
+                      href={`tel:${order.number}`}
+                      className="font-medium text-blue-600"
+                    >
+                      📞 {order.number}
+                    </a>
+                  </div>
+
+                  {/* Navigate Button */}
                   <a
                     href={`https://www.google.com/maps?q=${order.location.coordinates[1]},${order.location.coordinates[0]}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-700 hover:shadow-lg transition-all duration-300"
+                    className="w-full flex items-center justify-center gap-2 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition"
                   >
-                    📍 Navigate
+                    📍 Open Navigation
                   </a>
 
-                  <p className="text-sm text-blue-600 font-medium">
-                    🚚 Out for Delivery
-                  </p>
-
-                  <p>
-                    {order.number}
-                  </p>
-
-                  <p>
-                    {order.totalAmount}
-                  </p>
+                  {/* Delivered Button */}
+                  <button
+                    onClick={() => completeOrder(order._id)}
+                    className="w-full py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold transition"
+                  >
+                    ✅ Mark as Delivered
+                  </button>
 
                 </div>
-
-                <button
-                  onClick={() => completeOrder(order._id)}
-                  className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-xl font-semibold transition"
-                >
-                  Mark as Delivered
-                </button>
               </div>
             ))
           )}
