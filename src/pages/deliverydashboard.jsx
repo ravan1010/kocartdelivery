@@ -391,7 +391,7 @@ const Deliverydashboard = () => {
                           >
                             <div className="flex justify-between">
                               <span className="font-medium">
-                                {item.name}
+                               {item.productId?.name} - {item.name}
                               </span>
 
                               <span className="font-bold text-green-600">
