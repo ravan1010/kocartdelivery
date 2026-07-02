@@ -97,7 +97,6 @@ const Deliverydashboard = () => {
       )
         .then((res) => {
           if (res.data.success) {
-            alert('order assigned you')
             setstep(2)
             fetchOrders()
           }
@@ -273,6 +272,15 @@ const Deliverydashboard = () => {
                     <p className="font-bold text-gray-800 text-lg">
                       👤 {order.userId?.name}
                     </p>
+                      <div className="bg-gray-50 p-3 rounded-xl">
+                    <p className="text-xs text-gray-500">Customer Number</p>
+                    <a
+                      href={`tel:${order.number}`}
+                      className="font-medium text-blue-600"
+                    >
+                      📞 {order.number}
+                    </a>
+                  </div>
                   </div>
 
                   {/* Payment Details */}
@@ -469,7 +477,12 @@ const Deliverydashboard = () => {
                   <div className="bg-gray-50 p-3 rounded-xl">
                     <p className="text-sm text-gray-500">Delivery Address</p>
                     <p className="font-medium text-gray-800">
-                      📍 {order.address?.ASSV}
+                      {order.address?.Fullname}
+                      {order.address?.FHBCA}
+                      {order.address?.ASSV}
+                      {order.address?.Landmark}
+                      {order.address?.pincode}
+                      {order.address?.cityTown}
                     </p>
                   </div>
 
