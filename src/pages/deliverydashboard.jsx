@@ -187,8 +187,8 @@ const Deliverydashboard = () => {
           <button
             onClick={() => setstep(1)}
             className={`px-6 py-3 rounded-xl font-semibold transition-all ${step === 1
-                ? "bg-green-600 text-white shadow-lg"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              ? "bg-green-600 text-white shadow-lg"
+              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
           >
             🛒 Available Orders
@@ -197,8 +197,8 @@ const Deliverydashboard = () => {
           <button
             onClick={() => setstep(2)}
             className={`px-6 py-3 rounded-xl font-semibold transition-all ${step === 2
-                ? "bg-orange-500 text-white shadow-lg"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              ? "bg-orange-500 text-white shadow-lg"
+              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
           >
             📦 Pickup
@@ -207,8 +207,8 @@ const Deliverydashboard = () => {
           <button
             onClick={() => setstep(3)}
             className={`px-6 py-3 rounded-xl font-semibold transition-all ${step === 3
-                ? "bg-blue-600 text-white shadow-lg"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              ? "bg-blue-600 text-white shadow-lg"
+              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
           >
             🚚 Delivery
@@ -272,15 +272,15 @@ const Deliverydashboard = () => {
                     <p className="font-bold text-gray-800 text-lg">
                       👤 {order.userId?.name}
                     </p>
-                      <div className="bg-gray-50 p-3 rounded-xl">
-                    <p className="text-xs text-gray-500">Customer Number</p>
-                    <a
-                      href={`tel:${order.number}`}
-                      className="font-medium text-blue-600"
-                    >
-                      📞 {order.number}
-                    </a>
-                  </div>
+                    <div className="bg-gray-50 p-3 rounded-xl">
+                      <p className="text-xs text-gray-500">Customer Number</p>
+                      <a
+                        href={`tel:${order.number}`}
+                        className="font-medium text-blue-600"
+                      >
+                        📞 {order.number}
+                      </a>
+                    </div>
                   </div>
 
                   {/* Payment Details */}
@@ -399,7 +399,7 @@ const Deliverydashboard = () => {
                           >
                             <div className="flex justify-between">
                               <span className="font-medium">
-                               {item.productId?.name}
+                                {item.productId?.name}
                               </span>
 
                               <span className="font-bold text-green-600">
@@ -474,15 +474,19 @@ const Deliverydashboard = () => {
                 {/* Content */}
                 <div className="p-5 space-y-3">
 
-                  <div className="bg-gray-50 p-3 rounded-xl">
+                  <div className="bg-gray-50 p-3 rounded-xl space-y-1">
                     <p className="text-sm text-gray-500">Delivery Address</p>
-                    <p className="font-medium text-gray-800">
-                      {order.address?.Fullname}
+
+                    <p className="font-semibold">{order.address?.Fullname}</p>
+
+                    <p className="text-gray-700">
                       {order.address?.FHBCA}
-                      {order.address?.ASSV}
-                      {order.address?.Landmark}
-                      {order.address?.pincode}
-                      {order.address?.cityTown}
+                      {order.address?.ASSV && `, ${order.address.ASSV}`}
+                      {order.address?.Landmark && `, Near ${order.address.Landmark}`}
+                    </p>
+
+                    <p className="text-gray-700">
+                      {order.address?.cityTown} - {order.address?.pincode}
                     </p>
                   </div>
 
