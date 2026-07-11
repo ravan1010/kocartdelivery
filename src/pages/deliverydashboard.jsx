@@ -403,6 +403,10 @@ const Deliverydashboard = () => {
                               </span>
 
                               <span className="font-bold text-green-600">
+                                ₹{item.variantName}
+                              </span>
+
+                              <span className="font-bold text-green-600">
                                 ₹{item.price}
                               </span>
                             </div>
