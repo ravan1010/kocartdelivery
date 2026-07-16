@@ -236,7 +236,8 @@ const Deliverydashboard = () => {
                 {/* Header */}
                 <div className="bg-green-600 text-white p-4">
                   <p className="text-sm opacity-90">
-                    Order #{order._id.slice(-8)}
+   
+                    Order ID :{order.orderId || `kocart`}
                   </p>
 
                   <h2 className="font-bold text-lg">
@@ -355,7 +356,7 @@ const Deliverydashboard = () => {
                 {/* Header */}
                 <div className="bg-orange-500 text-white p-4">
                   <p className="text-sm opacity-90">
-                    Order #{order._id.slice(-8)}
+                    Order ID :{order.orderId || `kocart`}
                   </p>
                   <h2 className="font-bold text-lg">
                     📦 Assigned Order
@@ -468,7 +469,8 @@ const Deliverydashboard = () => {
                 {/* Header */}
                 <div className="bg-blue-600 text-white p-4">
                   <h3 className="text-xl font-bold">
-                    {order.userId?.name}
+                    {order.userId?.name} <br/>
+                    Order ID :{order.orderId || `kocart`}
                   </h3>
                   <p className="text-sm opacity-90">
                     🚚 Out for Delivery
