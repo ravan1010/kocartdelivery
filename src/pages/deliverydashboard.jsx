@@ -146,8 +146,10 @@ const Deliverydashboard = () => {
 
       {/* Delivery Status */}
       <div className="bg-white p-4 md:p-6 rounded-xl shadow flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <p>kocartAmount : {kocartAmount}</p>
+        <div className="flex items-center gap-4 ">
+          <div>
+          <p className='bold'>kocartAmount : {kocartAmount}</p>
+          </div>
           <div
             className={`p-3 rounded-full ${isOnline
               ? "bg-green-100 text-green-600"
