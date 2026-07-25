@@ -7,12 +7,12 @@ import { generateAndSaveFCMToken } from '../utili/token';
 
 const Deliverydashboard = () => {
 
-
-  const [isOnline, setisOnline] = useState(false)
+  const [kocartAmount, setkocartAmount] = useState(0);
+  const [isOnline, setisOnline] = useState(false);
   const [orders, setOrders] = useState([]);
   const [assigned, setassigned] = useState([]);
   const [pickedup, setpickedup] = useState([]);
-  const [step, setstep] = useState(1)
+  const [step, setstep] = useState(1);
 
 
   // const [error, setError] = useState('');
@@ -23,6 +23,7 @@ const Deliverydashboard = () => {
       const res = await api.get('/api/delivery/dashboard')
       console.log(res.data.isOnline, 'dashboard')
       setisOnline(res.data.isOnline)
+      setkocartAmount(res.data.kocartAmount || 0)
     } catch (error) {
       console.log(error)
     }
@@ -146,6 +147,7 @@ const Deliverydashboard = () => {
       {/* Delivery Status */}
       <div className="bg-white p-4 md:p-6 rounded-xl shadow flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-4">
+          <p>kocartAmount : {kocartAmount}</p>
           <div
             className={`p-3 rounded-full ${isOnline
               ? "bg-green-100 text-green-600"
@@ -560,6 +562,7 @@ const Deliverydashboard = () => {
           )}
         </div>
       )}
+
     </div>
   )
 }
