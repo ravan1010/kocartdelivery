@@ -10,6 +10,7 @@ const Deliverydashboard = () => {
   const [kocartAmount, setkocartAmount] = useState(0);
   const [isOnline, setisOnline] = useState(false);
   const [orders, setOrders] = useState([]);
+  const [activate, setactivate] = useState(null)
   const [assigned, setassigned] = useState([]);
   const [pickedup, setpickedup] = useState([]);
   const [step, setstep] = useState(1);
@@ -24,6 +25,7 @@ const Deliverydashboard = () => {
       console.log(res.data.isOnline, 'dashboard')
       setisOnline(res.data.isOnline)
       setkocartAmount(res.data.kocartAmount || 0)
+      setactivate(res.data.activate)
     } catch (error) {
       console.log(error)
     }
@@ -141,72 +143,92 @@ const Deliverydashboard = () => {
     }
   };
 
+  if (!activate) {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center z-50">
+
+        {/* Overlay */}
+        <div
+          className="absolute inset-0 bg-black opacity-60"
+        ></div>
+        {/* Popup Content */}
+        <div className="bg-white rounded-2xl shadow-lg text-center z-10 w-96 p-6">
+          <h1 className="text-red-500 mb-5">
+            ACTIVATE YOUR ACCOUNT
+          </h1>
+          <p>
+            contact (7349343243) or (8088303214) <br /> to active
+          </p>
+
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="p-4 md:p-6 max-w-6xl mx-auto space-y-6">
 
       {/* Delivery Status */}
-  <div className="bg-white p-4 md:p-6 rounded-xl shadow flex flex-col md:flex-row justify-between items-center gap-5">
+      <div className="bg-white p-4 md:p-6 rounded-xl shadow flex flex-col md:flex-row justify-between items-center gap-5">
 
-  {/* Left Side */}
-  <div className="flex items-center gap-4">
+        {/* Left Side */}
+        <div className="flex items-center gap-4">
 
-    <div
-      className={`p-3 rounded-full ${
-        isOnline
-          ? "bg-green-100 text-green-600"
-          : "bg-red-100 text-red-600"
-      }`}
-    >
-      {isOnline ? (
-        <ToggleRight size={30} />
-      ) : (
-        <ToggleLeft size={30} />
-      )}
-    </div>
+          <div
+            className={`p-3 rounded-full ${isOnline
+                ? "bg-green-100 text-green-600"
+                : "bg-red-100 text-red-600"
+              }`}
+          >
+            {isOnline ? (
+              <ToggleRight size={30} />
+            ) : (
+              <ToggleLeft size={30} />
+            )}
+          </div>
 
-    <div>
-      <h3 className="font-semibold text-lg">
-        Delivery Partner Status
-      </h3>
+          <div>
+            <h3 className="font-semibold text-lg">
+              Delivery Partner Status
+            </h3>
 
-      <p
-        className={`text-sm font-medium ${
-          isOnline ? "text-green-600" : "text-red-600"
-        }`}
-      >
-        {isOnline
-          ? "Online - Ready for Orders"
-          : "Offline"}
-      </p>
-    </div>
+            <p
+              className={`text-sm font-medium ${isOnline ? "text-green-600" : "text-red-600"
+                }`}
+            >
+              {isOnline
+                ? "Online - Ready for Orders"
+                : "Offline"}
+            </p>
+          </div>
 
-  </div>
+        </div>
 
-  {/* Right Side */}
-  <div className="flex items-center gap-6">
+        {/* Right Side */}
+        <div className="flex items-center gap-6">
 
-    {/* Cash Collected */}
-    <div className="bg-yellow-50 border border-yellow-200 rounded-lg px-4 py-2 text-center">
-      <p className="text-xs text-gray-500">
-        KOCART Cash
-      </p>
+          {/* Cash Collected */}
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg px-4 py-2 text-center">
+            <p className="text-xs text-gray-500">
+              KOCART Cash
+            </p>
 
-      <h2 className="text-xl font-bold text-yellow-700">
-        ₹{kocartAmount || 0}
-      </h2>
-    </div>
+            <h2 className="text-xl font-bold text-yellow-700">
+              ₹{kocartAmount || 0}
+            </h2>
+          </div>
 
-    {/* Toggle */}
-    <input
-      type="checkbox"
-      checked={isOnline}
-      onChange={handleToggle}
-      className="w-6 h-6 cursor-pointer"
-    />
+          {/* Toggle */}
+          <input
+            type="checkbox"
+            checked={isOnline}
+            onChange={handleToggle}
+            className="w-6 h-6 cursor-pointer"
+          />
 
-  </div>
+        </div>
 
-</div>
+      </div>
 
 
       {/* Navigation */}
@@ -265,8 +287,11 @@ const Deliverydashboard = () => {
                 {/* Header */}
                 <div className="bg-green-600 text-white p-4">
                   <p className="text-sm opacity-90">
-   
+
                     Order ID :{order.orderId || `kocart`}
+                  </p>
+                  <p>
+                    Rs : {order.deliveryBoyAmount || `ko`}
                   </p>
 
                   <h2 className="font-bold text-lg">
@@ -498,7 +523,7 @@ const Deliverydashboard = () => {
                 {/* Header */}
                 <div className="bg-blue-600 text-white p-4">
                   <h3 className="text-xl font-bold">
-                    {order.userId?.name} <br/>
+                    {order.userId?.name} <br />
                     Order ID :{order.orderId || `kocart`}
                   </h3>
                   <p className="text-sm opacity-90">
