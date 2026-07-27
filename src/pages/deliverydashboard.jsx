@@ -314,126 +314,151 @@ const Deliverydashboard = () => {
 
       {/* Available Orders */}
       {step === 1 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {orders?.length === 0 ? (
-            <div className="col-span-full bg-white rounded-2xl p-10 shadow-md text-center">
-              <h2 className="text-xl font-bold text-gray-700">
-                No Orders Available 📭
+  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+    {orders?.length === 0 ? (
+      <div className="col-span-full bg-white rounded-2xl shadow-lg p-10 text-center">
+        <h2 className="text-2xl font-bold text-gray-700">
+          📭 No Orders Available
+        </h2>
+        <p className="text-gray-500 mt-2">
+          New delivery requests will appear here.
+        </p>
+      </div>
+    ) : (
+      orders.map((order) => (
+        <div
+          key={order._id}
+          className="bg-white rounded-2xl shadow-lg border hover:shadow-2xl transition duration-300 overflow-hidden"
+        >
+          {/* Header */}
+          <div className="bg-green-600 text-white p-4 flex justify-between items-center">
+            <div>
+              <p className="text-sm opacity-90">
+                #{order.orderId}
+              </p>
+
+              <h2 className="font-bold text-lg">
+                🛒 New Order
               </h2>
             </div>
-          ) : (
-            Array.isArray(orders) &&
-            orders.map((order) => (
-              <div
-                key={order._id}
-                className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
-              >
-                {/* Header */}
-                <div className="bg-green-600 text-white p-4">
-                  <p className="text-sm opacity-90">
 
-                    Order ID :{order.orderId || `kocart`}
-                  </p>
-                  <p>
-                    Rs : {order.deliveryBoyAmount || `ko`}
-                  </p>
+            <div className="bg-white text-green-700 rounded-xl px-3 py-2 text-center">
+              <p className="text-xs">Earn</p>
 
-                  <h2 className="font-bold text-lg">
-                    🛒 New Delivery Request
-                  </h2>
-                </div>
+              <p className="font-bold text-lg">
+                ₹{order.deliveryBoyAmount}
+              </p>
+            </div>
+          </div>
 
-                <div className="p-5 space-y-4">
-                  {/* Shops */}
-                  <div className="bg-gray-50 rounded-xl p-3">
-                    <h4 className="font-semibold text-gray-700 mb-2">
-                      🏪 Pickup Stores
-                    </h4>
+          <div className="p-5 space-y-4">
 
-                    {order.shop?.map((shop) => (
-                      <div
-                        key={shop._id}
-                        className="bg-white p-2 rounded-lg border mb-2 last:mb-0"
-                      >
-                        <p className="font-medium text-gray-800">
-                          {shop.admin?.companyName}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
+            {/* Pickup Stores */}
+            <div>
+              <h3 className="font-semibold text-gray-700 mb-2">
+                🏪 Pickup Stores
+              </h3>
 
-                  {/* Customer */}
-                  <div className="bg-blue-50 rounded-xl p-3">
-                    <p className="text-sm text-gray-500">
-                      Customer
-                    </p>
-
-                    <p className="font-bold text-gray-800 text-lg">
-                      👤 {order.userId?.name}
-                    </p>
-                    <div className="bg-gray-50 p-3 rounded-xl">
-                      <p className="text-xs text-gray-500">Customer Number</p>
-                      <a
-                        href={`tel:${order.number}`}
-                        className="font-medium text-blue-600"
-                      >
-                        📞 {order.number}
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* Payment Details */}
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="bg-purple-50 p-3 rounded-xl">
-                      <p className="text-xs text-gray-500">
-                        Payment Method
-                      </p>
-
-                      <p className="font-semibold text-purple-700">
-                        {order.paymentMethod}
-                      </p>
-                    </div>
-
-                    <div className="bg-yellow-50 p-3 rounded-xl">
-                      <p className="text-xs text-gray-500">
-                        Status
-                      </p>
-
-                      <p
-                        className={`font-semibold ${order.paymentStatus === "Paid"
-                          ? "text-green-600"
-                          : "text-red-600"
-                          }`}
-                      >
-                        {order.paymentStatus}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Total */}
-                  <div className="bg-green-50 rounded-xl p-4 flex justify-between items-center">
-                    <span className="text-gray-600 font-medium">
-                      Order Value
-                    </span>
-
-                    <span className="text-2xl font-bold text-green-600">
-                      ₹{order.totalAmount}
-                    </span>
-                  </div>
-
-                  {/* Accept Button */}
-                  <button
-                    onClick={() => acceptOrder(order._id)}
-                    className="w-full py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold shadow-md transition-all"
+              <div className="space-y-2">
+                {order.shop?.map((shop) => (
+                  <div
+                    key={shop._id}
+                    className="bg-gray-100 rounded-lg p-3"
                   >
-                    ✅ Accept Order
-                  </button>
-                </div>
+                    <p className="font-semibold">
+                      {shop.admin?.companyName}
+                    </p>
+                  </div>
+                ))}
               </div>
-            ))
-          )}
+            </div>
+
+            {/* Customer */}
+            <div className="bg-blue-50 rounded-xl p-4">
+              <p className="text-sm text-gray-500">
+                Customer
+              </p>
+
+              <p className="font-bold text-lg">
+                👤 {order.userId?.name}
+              </p>
+
+              <a
+                href={`tel:${order.number}`}
+                className="text-blue-600 font-medium"
+              >
+                📞 {order.number}
+              </a>
+            </div>
+
+            {/* Payment */}
+            <div className="grid grid-cols-2 gap-3">
+
+              <div className="bg-purple-50 rounded-xl p-3 text-center">
+                <p className="text-xs text-gray-500">
+                  Payment
+                </p>
+
+                <p className="font-bold text-purple-700">
+                  {order.paymentMethod}
+                </p>
+              </div>
+
+              <div className="bg-yellow-50 rounded-xl p-3 text-center">
+                <p className="text-xs text-gray-500">
+                  Status
+                </p>
+
+                <p
+                  className={`font-bold ${
+                    order.paymentStatus === "Paid"
+                      ? "text-green-600"
+                      : "text-red-600"
+                  }`}
+                >
+                  {order.paymentStatus}
+                </p>
+              </div>
+
+            </div>
+
+            {/* Order Total */}
+            <div className="flex justify-between items-center bg-green-50 rounded-xl p-4">
+              <div>
+                <p className="text-sm text-gray-500">
+                  Order Value
+                </p>
+
+                <h2 className="text-2xl font-bold text-green-600">
+                  ₹{order.totalAmount}
+                </h2>
+              </div>
+
+              <div className="text-right">
+                <p className="text-sm text-gray-500">
+                  Delivery Pay
+                </p>
+
+                <h2 className="text-xl font-bold text-blue-600">
+                  ₹{order.deliveryBoyAmount}
+                </h2>
+              </div>
+            </div>
+
+            {/* Accept */}
+            <button
+              onClick={() => acceptOrder(order._id)}
+              className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-bold transition"
+            >
+              ✅ Accept Order
+            </button>
+
+          </div>
         </div>
-      )}
+      ))
+    )}
+  </div>
+)}
 
       {/* pickup Orders */}
       {step === 2 && (
