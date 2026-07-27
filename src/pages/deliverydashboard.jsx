@@ -219,8 +219,9 @@ const Deliverydashboard = () => {
         </p>
 
         <h2 className="text-2xl font-bold text-yellow-700">
-          ₹{kocartAmount || 0}
-        </h2>
+          ₹{Number(kocartAmount || 0).toFixed(2)}        
+          
+          </h2>
       </div>
 
       <div className="bg-green-50 border border-green-200 rounded-xl p-4 text-center">
