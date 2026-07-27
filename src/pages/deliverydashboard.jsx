@@ -8,6 +8,7 @@ import { generateAndSaveFCMToken } from '../utili/token';
 const Deliverydashboard = () => {
 
   const [kocartAmount, setkocartAmount] = useState(0);
+  const [deliveryBoyAmount, setdeliveryBoyAmount] = useState(0);
   const [isOnline, setisOnline] = useState(false);
   const [orders, setOrders] = useState([]);
   const [activate, setactivate] = useState(null)
@@ -26,6 +27,7 @@ const Deliverydashboard = () => {
       setisOnline(res.data.isOnline)
       setkocartAmount(res.data.kocartAmount || 0)
       setactivate(res.data.activate)
+      setdeliveryBoyAmount(res.data.deliveryBoyAmount)
     } catch (error) {
       console.log(error)
     }
@@ -217,6 +219,18 @@ const Deliverydashboard = () => {
               ₹{kocartAmount || 0}
             </h2>
           </div>
+           <div className="bg-yellow-50 border border-yellow-200 rounded-lg px-4 py-2 text-center">
+            <p className="text-xs text-gray-500">
+              delivery parter Amount 
+            </p>
+
+            <h2 className="text-xl font-bold text-yellow-700">
+              ₹{deliveryBoyAmount || 0}
+            </h2>
+          </div>
+          </div>
+
+
 
           {/* Toggle */}
           <input
@@ -226,7 +240,6 @@ const Deliverydashboard = () => {
             className="w-6 h-6 cursor-pointer"
           />
 
-        </div>
 
       </div>
 
