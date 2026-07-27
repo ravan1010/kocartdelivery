@@ -171,77 +171,108 @@ const Deliverydashboard = () => {
     <div className="p-4 md:p-6 max-w-6xl mx-auto space-y-6">
 
       {/* Delivery Status */}
-      <div className="bg-white p-4 md:p-6 rounded-xl shadow flex flex-col md:flex-row justify-between items-center gap-5">
+     {/* Delivery Dashboard */}
+<div className="bg-white rounded-2xl shadow-lg p-5">
+  <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
 
-        {/* Left Side */}
-        <div className="flex items-center gap-4">
+    {/* Left - Online Status */}
+    <div className="flex items-center gap-4">
 
-          <div
-            className={`p-3 rounded-full ${isOnline
-                ? "bg-green-100 text-green-600"
-                : "bg-red-100 text-red-600"
-              }`}
-          >
-            {isOnline ? (
-              <ToggleRight size={30} />
-            ) : (
-              <ToggleLeft size={30} />
-            )}
-          </div>
-
-          <div>
-            <h3 className="font-semibold text-lg">
-              Delivery Partner Status
-            </h3>
-
-            <p
-              className={`text-sm font-medium ${isOnline ? "text-green-600" : "text-red-600"
-                }`}
-            >
-              {isOnline
-                ? "Online - Ready for Orders"
-                : "Offline"}
-            </p>
-          </div>
-
-        </div>
-
-        {/* Right Side */}
-        <div className="flex items-center gap-6">
-
-          {/* Cash Collected */}
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg px-4 py-2 text-center">
-            <p className="text-xs text-gray-500">
-              KOCART Cash
-            </p>
-
-            <h2 className="text-xl font-bold text-yellow-700">
-              ₹{kocartAmount || 0}
-            </h2>
-          </div>
-           <div className="bg-yellow-50 border border-yellow-200 rounded-lg px-4 py-2 text-center">
-            <p className="text-xs text-gray-500">
-              delivery parter Amount 
-            </p>
-
-            <h2 className="text-xl font-bold text-yellow-700">
-              ₹{deliveryBoyAmount || 0}
-            </h2>
-          </div>
-          </div>
-
-
-
-          {/* Toggle */}
-          <input
-            type="checkbox"
-            checked={isOnline}
-            onChange={handleToggle}
-            className="w-6 h-6 cursor-pointer"
-          />
-
-
+      <div
+        className={`p-3 rounded-full ${
+          isOnline
+            ? "bg-green-100 text-green-600"
+            : "bg-red-100 text-red-600"
+        }`}
+      >
+        {isOnline ? (
+          <ToggleRight size={34} />
+        ) : (
+          <ToggleLeft size={34} />
+        )}
       </div>
+
+      <div>
+        <h2 className="text-xl font-bold text-gray-800">
+          Delivery Partner
+        </h2>
+
+        <p
+          className={`font-medium ${
+            isOnline ? "text-green-600" : "text-red-600"
+          }`}
+        >
+          {isOnline
+            ? "🟢 Online - Ready for Orders"
+            : "🔴 Offline"}
+        </p>
+      </div>
+
+    </div>
+
+    {/* Center - Dashboard Cards */}
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 flex-1">
+
+      <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 text-center">
+        <p className="text-xs text-gray-500">
+          KOCART Cash
+        </p>
+
+        <h2 className="text-2xl font-bold text-yellow-700">
+          ₹{kocartAmount || 0}
+        </h2>
+      </div>
+
+      <div className="bg-green-50 border border-green-200 rounded-xl p-4 text-center">
+        <p className="text-xs text-gray-500">
+          Your Earnings
+        </p>
+
+        <h2 className="text-2xl font-bold text-green-700">
+          ₹{deliveryBoyAmount || 0}
+        </h2>
+      </div>
+
+      <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-center">
+        <p className="text-xs text-gray-500">
+          Available
+        </p>
+
+        <h2 className="text-2xl font-bold text-blue-700">
+          {orders?.length || 0}
+        </h2>
+      </div>
+
+      <div className="bg-purple-50 border border-purple-200 rounded-xl p-4 text-center">
+        <p className="text-xs text-gray-500">
+          Delivering
+        </p>
+
+        <h2 className="text-2xl font-bold text-purple-700">
+          {pickedup?.length || 0}
+        </h2>
+      </div>
+
+    </div>
+
+    {/* Right - Toggle */}
+    <div className="flex flex-col items-center gap-2">
+
+      <input
+        type="checkbox"
+        checked={isOnline}
+        onChange={handleToggle}
+        className="w-7 h-7 cursor-pointer"
+      />
+
+      <span className="text-sm text-gray-500">
+        {isOnline ? "Online" : "Offline"}
+      </span>
+
+    </div>
+
+  </div>
+</div>
 
 
       {/* Navigation */}
