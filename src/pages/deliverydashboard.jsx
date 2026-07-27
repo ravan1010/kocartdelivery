@@ -103,7 +103,7 @@ const Deliverydashboard = () => {
         .then((res) => {
           if (res.data.success) {
             setstep(2)
-            fetchOrders()
+            window.location.reload();
           }
         })
     } catch (error) {
@@ -119,7 +119,7 @@ const Deliverydashboard = () => {
         .then((res) => {
           if (res.data.success) {
             alert(res.data.message)
-            fetchAssignOrders()
+            window.location.reload();
             setstep(3)
           }
         })
@@ -136,8 +136,8 @@ const Deliverydashboard = () => {
         .then((res) => {
           if (res.data.success) {
             alert(res.data.message)
-            fetchpickedupOrders()
             setstep(1)
+            window.location.reload();
           }
         })
     } catch (error) {
