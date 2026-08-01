@@ -171,109 +171,107 @@ const Deliverydashboard = () => {
     <div className="p-4 md:p-6 max-w-6xl mx-auto space-y-6">
 
       {/* Delivery Status */}
-     {/* Delivery Dashboard */}
-<div className="bg-white rounded-2xl shadow-lg p-5">
-  <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+      {/* Delivery Dashboard */}
+      <div className="bg-white rounded-2xl shadow-lg p-5">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
 
-    {/* Left - Online Status */}
-    <div className="flex items-center gap-4">
+          {/* Left - Online Status */}
+          <div className="flex items-center gap-4">
 
-      <div
-        className={`p-3 rounded-full ${
-          isOnline
-            ? "bg-green-100 text-green-600"
-            : "bg-red-100 text-red-600"
-        }`}
-      >
-        {isOnline ? (
-          <ToggleRight size={34} />
-        ) : (
-          <ToggleLeft size={34} />
-        )}
+            <div
+              className={`p-3 rounded-full ${isOnline
+                ? "bg-green-100 text-green-600"
+                : "bg-red-100 text-red-600"
+                }`}
+            >
+              {isOnline ? (
+                <ToggleRight size={34} />
+              ) : (
+                <ToggleLeft size={34} />
+              )}
+            </div>
+
+            <div>
+              <h2 className="text-xl font-bold text-gray-800">
+                Delivery Partner
+              </h2>
+
+              <p
+                className={`font-medium ${isOnline ? "text-green-600" : "text-red-600"
+                  }`}
+              >
+                {isOnline
+                  ? "🟢 Online - Ready for Orders"
+                  : "🔴 Offline"}
+              </p>
+            </div>
+
+          </div>
+
+          {/* Center - Dashboard Cards */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 flex-1">
+
+            <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 text-center">
+              <p className="text-xs text-gray-500">
+                KOCART Cash
+              </p>
+
+              <h2 className="text-2xl font-bold text-yellow-700">
+                ₹{Number(kocartAmount || 0).toFixed(2)}
+
+              </h2>
+            </div>
+
+            <div className="bg-green-50 border border-green-200 rounded-xl p-4 text-center">
+              <p className="text-xs text-gray-500">
+                Your Earnings
+              </p>
+
+              <h2 className="text-2xl font-bold text-green-700">
+                ₹{deliveryBoyAmount || 0}
+              </h2>
+            </div>
+
+            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-center">
+              <p className="text-xs text-gray-500">
+                Available
+              </p>
+
+              <h2 className="text-2xl font-bold text-blue-700">
+                {orders?.length || 0}
+              </h2>
+            </div>
+
+            <div className="bg-purple-50 border border-purple-200 rounded-xl p-4 text-center">
+              <p className="text-xs text-gray-500">
+                Delivering
+              </p>
+
+              <h2 className="text-2xl font-bold text-purple-700">
+                {pickedup?.length || 0}
+              </h2>
+            </div>
+
+          </div>
+
+          {/* Right - Toggle */}
+          <div className="flex flex-col items-center gap-2">
+
+            <input
+              type="checkbox"
+              checked={isOnline}
+              onChange={handleToggle}
+              className="w-7 h-7 cursor-pointer"
+            />
+
+            <span className="text-sm text-gray-500">
+              {isOnline ? "Online" : "Offline"}
+            </span>
+
+          </div>
+
+        </div>
       </div>
-
-      <div>
-        <h2 className="text-xl font-bold text-gray-800">
-          Delivery Partner
-        </h2>
-
-        <p
-          className={`font-medium ${
-            isOnline ? "text-green-600" : "text-red-600"
-          }`}
-        >
-          {isOnline
-            ? "🟢 Online - Ready for Orders"
-            : "🔴 Offline"}
-        </p>
-      </div>
-
-    </div>
-
-    {/* Center - Dashboard Cards */}
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 flex-1">
-
-      <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 text-center">
-        <p className="text-xs text-gray-500">
-          KOCART Cash
-        </p>
-
-        <h2 className="text-2xl font-bold text-yellow-700">
-          ₹{Number(kocartAmount || 0).toFixed(2)}        
-          
-          </h2>
-      </div>
-
-      <div className="bg-green-50 border border-green-200 rounded-xl p-4 text-center">
-        <p className="text-xs text-gray-500">
-          Your Earnings
-        </p>
-
-        <h2 className="text-2xl font-bold text-green-700">
-          ₹{deliveryBoyAmount || 0}
-        </h2>
-      </div>
-
-      <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-center">
-        <p className="text-xs text-gray-500">
-          Available
-        </p>
-
-        <h2 className="text-2xl font-bold text-blue-700">
-          {orders?.length || 0}
-        </h2>
-      </div>
-
-      <div className="bg-purple-50 border border-purple-200 rounded-xl p-4 text-center">
-        <p className="text-xs text-gray-500">
-          Delivering
-        </p>
-
-        <h2 className="text-2xl font-bold text-purple-700">
-          {pickedup?.length || 0}
-        </h2>
-      </div>
-
-    </div>
-
-    {/* Right - Toggle */}
-    <div className="flex flex-col items-center gap-2">
-
-      <input
-        type="checkbox"
-        checked={isOnline}
-        onChange={handleToggle}
-        className="w-7 h-7 cursor-pointer"
-      />
-
-      <span className="text-sm text-gray-500">
-        {isOnline ? "Online" : "Offline"}
-      </span>
-
-    </div>
-
-  </div>
-</div>
 
 
       {/* Navigation */}
@@ -315,151 +313,150 @@ const Deliverydashboard = () => {
 
       {/* Available Orders */}
       {step === 1 && (
-  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-    {orders?.length === 0 ? (
-      <div className="col-span-full bg-white rounded-2xl shadow-lg p-10 text-center">
-        <h2 className="text-2xl font-bold text-gray-700">
-          📭 No Orders Available
-        </h2>
-        <p className="text-gray-500 mt-2">
-          New delivery requests will appear here.
-        </p>
-      </div>
-    ) : (
-      orders.map((order) => (
-        <div
-          key={order._id}
-          className="bg-white rounded-2xl shadow-lg border hover:shadow-2xl transition duration-300 overflow-hidden"
-        >
-          {/* Header */}
-          <div className="bg-green-600 text-white p-4 flex justify-between items-center">
-            <div>
-              <p className="text-sm opacity-90">
-                #{order.orderId}
-              </p>
-
-              <h2 className="font-bold text-lg">
-                🛒 New Order
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          {orders?.length === 0 ? (
+            <div className="col-span-full bg-white rounded-2xl shadow-lg p-10 text-center">
+              <h2 className="text-2xl font-bold text-gray-700">
+                📭 No Orders Available
               </h2>
-            </div>
-
-            <div className="bg-white text-green-700 rounded-xl px-3 py-2 text-center">
-              <p className="text-xs">Earn</p>
-
-              <p className="font-bold text-lg">
-                ₹{order.deliveryBoyAmount}
+              <p className="text-gray-500 mt-2">
+                New delivery requests will appear here.
               </p>
             </div>
-          </div>
+          ) : (
+            orders.map((order) => (
+              <div
+                key={order._id}
+                className="bg-white rounded-2xl shadow-lg border hover:shadow-2xl transition duration-300 overflow-hidden"
+              >
+                {/* Header */}
+                <div className="bg-green-600 text-white p-4 flex justify-between items-center">
+                  <div>
+                    <p className="text-sm opacity-90">
+                      #{order.orderId}
+                    </p>
 
-          <div className="p-5 space-y-4">
+                    <h2 className="font-bold text-lg">
+                      🛒 New Order
+                    </h2>
+                  </div>
 
-            {/* Pickup Stores */}
-            <div>
-              <h3 className="font-semibold text-gray-700 mb-2">
-                🏪 Pickup Stores
-              </h3>
+                  <div className="bg-white text-green-700 rounded-xl px-3 py-2 text-center">
+                    <p className="text-xs">Earn</p>
 
-              <div className="space-y-2">
-                {order.shop?.map((shop) => (
-                  <div
-                    key={shop._id}
-                    className="bg-gray-100 rounded-lg p-3"
-                  >
-                    <p className="font-semibold">
-                      {shop.admin?.companyName}
+                    <p className="font-bold text-lg">
+                      ₹{order.deliveryBoyAmount}
                     </p>
                   </div>
-                ))}
+                </div>
+
+                <div className="p-5 space-y-4">
+
+                  {/* Pickup Stores */}
+                  <div>
+                    <h3 className="font-semibold text-gray-700 mb-2">
+                      🏪 Pickup Stores
+                    </h3>
+
+                    <div className="space-y-2">
+                      {order.shop?.map((shop) => (
+                        <div
+                          key={shop._id}
+                          className="bg-gray-100 rounded-lg p-3"
+                        >
+                          <p className="font-semibold">
+                            {shop.admin?.companyName}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Customer */}
+                  <div className="bg-blue-50 rounded-xl p-4">
+                    <p className="text-sm text-gray-500">
+                      Customer
+                    </p>
+
+                    <p className="font-bold text-lg">
+                      👤 {order.userId?.name}
+                    </p>
+
+                    <a
+                      href={`tel:${order.number}`}
+                      className="text-blue-600 font-medium"
+                    >
+                      📞 {order.number}
+                    </a>
+                  </div>
+
+                  {/* Payment */}
+                  <div className="grid grid-cols-2 gap-3">
+
+                    <div className="bg-purple-50 rounded-xl p-3 text-center">
+                      <p className="text-xs text-gray-500">
+                        Payment
+                      </p>
+
+                      <p className="font-bold text-purple-700">
+                        {order.paymentMethod}
+                      </p>
+                    </div>
+
+                    <div className="bg-yellow-50 rounded-xl p-3 text-center">
+                      <p className="text-xs text-gray-500">
+                        Status
+                      </p>
+
+                      <p
+                        className={`font-bold ${order.paymentStatus === "Paid"
+                          ? "text-green-600"
+                          : "text-red-600"
+                          }`}
+                      >
+                        {order.paymentStatus}
+                      </p>
+                    </div>
+
+                  </div>
+
+                  {/* Order Total */}
+                  <div className="flex justify-between items-center bg-green-50 rounded-xl p-4">
+                    <div>
+                      <p className="text-sm text-gray-500">
+                        Order Value
+                      </p>
+
+                      <h2 className="text-2xl font-bold text-green-600">
+                        ₹{order.totalAmount}
+                      </h2>
+                    </div>
+
+                    <div className="text-right">
+                      <p className="text-sm text-gray-500">
+                        Delivery Pay
+                      </p>
+
+                      <h2 className="text-xl font-bold text-blue-600">
+                        ₹{order.deliveryBoyAmount}
+                      </h2>
+                    </div>
+                  </div>
+
+                  {/* Accept */}
+                  <button
+                    onClick={() => acceptOrder(order._id)}
+                    className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-bold transition"
+                  >
+                    ✅ Accept Order
+                  </button>
+
+                </div>
               </div>
-            </div>
-
-            {/* Customer */}
-            <div className="bg-blue-50 rounded-xl p-4">
-              <p className="text-sm text-gray-500">
-                Customer
-              </p>
-
-              <p className="font-bold text-lg">
-                👤 {order.userId?.name}
-              </p>
-
-              <a
-                href={`tel:${order.number}`}
-                className="text-blue-600 font-medium"
-              >
-                📞 {order.number}
-              </a>
-            </div>
-
-            {/* Payment */}
-            <div className="grid grid-cols-2 gap-3">
-
-              <div className="bg-purple-50 rounded-xl p-3 text-center">
-                <p className="text-xs text-gray-500">
-                  Payment
-                </p>
-
-                <p className="font-bold text-purple-700">
-                  {order.paymentMethod}
-                </p>
-              </div>
-
-              <div className="bg-yellow-50 rounded-xl p-3 text-center">
-                <p className="text-xs text-gray-500">
-                  Status
-                </p>
-
-                <p
-                  className={`font-bold ${
-                    order.paymentStatus === "Paid"
-                      ? "text-green-600"
-                      : "text-red-600"
-                  }`}
-                >
-                  {order.paymentStatus}
-                </p>
-              </div>
-
-            </div>
-
-            {/* Order Total */}
-            <div className="flex justify-between items-center bg-green-50 rounded-xl p-4">
-              <div>
-                <p className="text-sm text-gray-500">
-                  Order Value
-                </p>
-
-                <h2 className="text-2xl font-bold text-green-600">
-                  ₹{order.totalAmount}
-                </h2>
-              </div>
-
-              <div className="text-right">
-                <p className="text-sm text-gray-500">
-                  Delivery Pay
-                </p>
-
-                <h2 className="text-xl font-bold text-blue-600">
-                  ₹{order.deliveryBoyAmount}
-                </h2>
-              </div>
-            </div>
-
-            {/* Accept */}
-            <button
-              onClick={() => acceptOrder(order._id)}
-              className="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-bold transition"
-            >
-              ✅ Accept Order
-            </button>
-
-          </div>
+            ))
+          )}
         </div>
-      ))
-    )}
-  </div>
-)}
+      )}
 
       {/* pickup Orders */}
       {step === 2 && (
@@ -508,6 +505,16 @@ const Deliverydashboard = () => {
                           className="px-3 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700"
                         >
                           📍 Navigate
+                        </a>
+                      </div>
+                      <div className="bg-gray-50 p-3 rounded-xl">
+                        <p className="text-xs text-gray-500"> Number</p>
+
+                        <a
+                          href={`tel:${shop.admin?.number}`}
+                          className="font-medium text-blue-600"
+                        >  
+                          📞 {shop.admin?.number}
                         </a>
                       </div>
 
