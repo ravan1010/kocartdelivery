@@ -16,6 +16,12 @@ const Deliverydashboard = () => {
   const [pickedup, setpickedup] = useState([]);
   const [step, setstep] = useState(1);
 
+  const [oneclick, setOneclick] = useState(1);
+
+  const isDisabled =
+  oneclick !== 1; 
+  
+
 
   // const [error, setError] = useState('');
   // const [success, setsuccess] = useState('');
@@ -112,13 +118,22 @@ const Deliverydashboard = () => {
   };
 
   const pickedupOrder = async (orderId) => {
-    try {
+
+    if(setOneclick === 2){
+      return
+    }
+
+    setOneclick(2)
+
+    try {    
+
       await api.put(`/api/delivery/pickedup/${orderId}`,
         {}
       )
         .then((res) => {
           if (res.data.success) {
             alert(res.data.message)
+            setOneclick(1)
             window.location.reload();
             setstep(3)
           }
@@ -129,13 +144,22 @@ const Deliverydashboard = () => {
   };
 
   const completeOrder = async (orderId) => {
+
+    if(setOneclick === 2){
+      return
+    }
+
+    setOneclick(2)
+
     try {
       await api.put(`/api/delivery/complete/${orderId}`,
         {}
       )
         .then((res) => {
           if (res.data.success) {
+
             alert(res.data.message)
+            setOneclick(1)
             setstep(1)
             window.location.reload();
           }
@@ -507,16 +531,7 @@ const Deliverydashboard = () => {
                           📍 Navigate
                         </a>
                       </div>
-                      <div className="bg-gray-50 p-3 rounded-xl">
-                        <p className="text-xs text-gray-500"> Number</p>
-
-                        <a
-                          href={`tel:${shop.admin?.number}`}
-                          className="font-medium text-blue-600"
-                        >  
-                          📞 {shop.admin?.number}
-                        </a>
-                      </div>
+                    
 
                       {/* Products */}
                       <div className="mt-4 space-y-2">
@@ -569,6 +584,7 @@ const Deliverydashboard = () => {
 
                   {/* Pickup Button */}
                   <button
+                    disabled={isDisabled}
                     onClick={() => pickedupOrder(order._id)}
                     className="w-full py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-xl shadow-md transition-all"
                   >
@@ -679,6 +695,7 @@ const Deliverydashboard = () => {
 
                   {/* Delivered Button */}
                   <button
+                    disabled={isDisabled}
                     onClick={() => completeOrder(order._id)}
                     className="w-full py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl font-bold transition"
                   >
